@@ -12,7 +12,6 @@ handle = Entrez.egquery(term=search_term)
 record = Entrez.read(handle)
 for row in record["eGQueryResult"]:
     if row['DbName']=="pubmed":
-        print(row["Count"])
         paper_numbers=row["Count"]
 
 handle = Entrez.esearch(db="pubmed", \
@@ -52,10 +51,6 @@ for record in records:
                 continue
     except KeyError:
         continue
-
-paper_find=list(set(paper_find))
-print(len(paper_find))
-
 
 
 miRNA_counts={}
@@ -218,7 +213,7 @@ counts= miRNAs_20.values()
 x = np.arange(len(miRNAs))
 ax.bar(x, counts, color='#0343df')
 ax.set_ylabel('Papers')
-ax.set_title('Most 20 studied miRNAs in '+ search_term.split(' ')[0])
+ax.set_title('Most studied 20 miRNAs in '+ search_term.split(' ')[0])
 ax.set_xticks(x)    
 ax.set_xticklabels(miRNAs, rotation=75)
 plt.show()
